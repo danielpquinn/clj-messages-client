@@ -1,4 +1,4 @@
-* CLJ Messages Client
+# clj Messages Client
 
 Front end of clojure message sharing app written in ClojureScript and Reagent.
 
