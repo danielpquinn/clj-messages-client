@@ -16,5 +16,4 @@
   (let [username (reagent/atom (get-in @app-state [:user :username]))]
     (fn []
       [:form {:className "profile" :on-submit #(handle-submit % app-state username)}
-        [:p (get-in @app-state [:user :username])]
         (forms/labeled-atom-input "text" "Username" "username" username)])))

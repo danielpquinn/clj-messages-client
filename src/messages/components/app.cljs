@@ -1,8 +1,8 @@
 (ns messages.components.app
-  (:require [messages.components.profile :as profile]))
+  (:require [messages.components.signup :as profile]))
 
-;; Top level app component
+;; Top level app component, renders current-page component
+;; which is stored in global application state
 
 (defn app [app-state]
-  [:div {:className "messages"}
-    [profile/profile app-state]])
+  [(:page @app-state)])
