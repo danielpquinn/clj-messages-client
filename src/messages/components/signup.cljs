@@ -1,21 +1,12 @@
 (ns messages.components.signup
-  (:require [reagent.core :as reagent]))
+  (:require [reagent.core :as reagent]
+            [messages.components.forms :as forms]))
 
 ;; Handle form submission
 
 (defn handle-submit [e username email password password-confirm]
   (.log js/console @username @email @password @password-confirm)
   (.preventDefault e))
-
-;; Handle input changes
-
-(defn handle-input-change [e atom]
-  (swap! atom (get-in e (.-value (.-target e)))))
-
-;; String atom input component
-
-(defn atom-input [type name atom]
-  [:input {:type type :name name :value @atom :on-change #(reset! atom (-> % .-target .-value))}])
 
 ;; Signup component
 
@@ -25,10 +16,10 @@
         password (reagent/atom "")
         password-confirm (reagent/atom "")]
     (fn []
-      [:div {:class-name "signup"}
-        [:form {:on-submit #(handle-submit % username email password password-confirm)}
-          (atom-input "text" "username" username)
-          (atom-input "text" "email" email)
-          (atom-input "password" "password" password)
-          (atom-input "password" "password-confirm" password-confirm)
+      [:div {:class-name "row signup"}
+        [:form {:className "col-4 col-offset-4" :on-submit #(handle-submit % username email password password-confirm)}
+          (forms/labeled-atom-input "Username" "text" "username" username)
+          (forms/labeled-atom-input "Email" "text" "email" email)
+          (forms/labeled-atom-input "Password" "password" "password" password)
+          (forms/labeled-atom-input "Confirm password" "password" "password-confirm" password-confirm)
           [:button {:type "submit"} "Sign up"]]])))
